@@ -1,0 +1,4 @@
+flask
+wtforms
+psycopg2
+python-dotenv
