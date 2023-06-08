@@ -6,6 +6,7 @@ app.config['SECRET_KEY'] = util.get_secret_key()
 
 util.reset()
 
+
 db_cursor = util.connect().cursor()
 
 
