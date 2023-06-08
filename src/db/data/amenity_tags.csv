@@ -1,1 +1,32 @@
-amenity_id;tag
+amenity_id,tag
+1,Free
+4,Convenience store
+0,Paid
+0,Family-friendly
+0,Attractions
+1,Toilet
+2,Park
+3,Toilet
+3,Free
+4,Fast-food
+5,Bakery
+6,Restaurant
+6,Coffeeshop
+6,Bakery
+
+
+#type
+#Toilet
+#Pissoir
+#Free
+#Pay-to-use
+#Restaurant
+#Fast-food
+#Convenience store
+#Grocery store
+#Family-friendly
+#Park
+#Attractions
+#Museum
+#Coffeshop
+#Bakery

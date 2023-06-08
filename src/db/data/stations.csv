@@ -1,13 +1,14 @@
-name,address,area
-Hellerup,Ryvangs Alle 79C 2900 Hellerup,Gentofte
-Rygparken,Lyngbyvej 102 2100 København Ø,Østerbro
-Bispebjerg,Tagensvej 147 2400 København NV,Nordvest
-Nørrebro,Folmer Bendtsens Plads 17 2200 København N,Nørrebro
-Fuglebakken,Borups Allé 143 2000 Frederiksberg,Frederiksberg
-Grøndal,Grøndal Torv 173 2720 Vanløse,Vanløse
-Flintholm,Flintholm Alle 55 2000 Frederiksberg,Frederiksberg
-KB Hallen,Peter Bangs Vej 163A 2000 Frederiksberg,Frederiksberg
-Ålholm,Roskildevej 131 2500 Valby,Valby
-Danshøj,Ansgars Allé 20 2500 Valby,Valby
-Vigerslev,Vigerslev Allé 141 2500 Valby,Valby
-Ny Ellebjerg,Carl Jacobsens vej 19 2500 Valby,Valby
+name,area
+#F-line
+Hellerup,Gentofte
+Ryparken,Østerbro
+Bispebjerg,Nordvest
+Nørrebro,Nørrebro
+Fuglebakken,Frederiksberg
+Grøndal,Vanløse
+Flintholm,Frederiksberg
+KB Hallen,Frederiksberg
+Ålholm,Valby
+Danshøj,Valby
+Vigerslev,Valby
+Ny Ellebjerg,Valby

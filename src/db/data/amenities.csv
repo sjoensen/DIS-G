@@ -1,2 +1,8 @@
-id;address;name;minutes_to_reach;station
-;;;
+id,name,location
+0,Eksperimentariet,Hellerup
+1,Toilet,Hellerup
+2,Ryvangs Naturplads,Hellerup
+3,Waterfront Shopping Center - toilet,Hellerup
+4,7-eleven,Hellerup
+5,Emmerys,Hellerup
+6,Waterfront Shopping Center,Hellerup

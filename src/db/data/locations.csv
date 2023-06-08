@@ -1,0 +1,19 @@
+id,address,station,name,minutes_to_walk
+1,Ryvangs Alle 79C 2900 Hellerup,Hellerup,Hellerup,0
+2,Lyngbyvej 102 2100 København Ø,Ryparken,Østerbro,0
+3,Tagensvej 147 2400 København NV,Bispebjerg,Bispebjerg,0
+4,Nørrebrogade 253 2200 København N,Nørrebro,Nørrebro,0
+5,Borups Allé 143 2000 Frederiksberg,Fuglebakken,Fuglebakken,0
+6,Grøndal Torv 173 2720 Vanløse,Grøndal,Grøndal,0
+7,Flintholm Alle 55 2000 Frederiksberg,Flintholm,Flintholm,0
+8,Peter Bangs Vej 163A 2000 Frederiksberg,KB Hallen,KB Hallen,0
+9,Roskildevej 131 2500 Valby,Ålholm,Ålholm,0
+10,Ansgars Allé 20 2500 Valby,Danshøj,Danshøj,0
+11,Vigerslev Allé 141 2500 Valby,Vigerslev,Vigerslev,0
+12,Carl Jacobsens vej 19 2500 Valby,Ny Ellebjerg,Ny Ellebjerg,0
+13,Tuborg Havnevej 7 2900 Hellerup,Hellerup,Eksperimentariet,15
+14,Rymarksvej 75B 2900 Hellerup,Hellerup,Toilet,16
+15,Rymarksvej 123 2900 Hellerup,Hellerup,Ryvangs Naturplads,12
+16,Philip Heymans Alle 17 2900 Hellerup,Hellerup,Waterfront Shopping Center,14
+17,Ryvangs Allé 79 2900 Hellerup,Hellerup,7-eleven,0
+18,Ryvangs Allé 89a 2900 Hellerup,Hellerup,Emmerys,2
