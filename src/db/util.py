@@ -13,18 +13,27 @@ SCHEMA_FILES = [
     "lines",
     "stations",
     "station_lines",
+    "locations",
     "amenities",
     "tags",
-    "amenity_tags"
+    "amenity_tags",
+    "amenity_locations"
 ]
 
 # [ filename, [ column_names ] ]
 CSV_FILES = [
     ("lines", ["name", "length"]),
-    ("stations", ["name", "address", "area"]),
-    ("station_lines", ["station", "line", "position"]),
-    ("tags", ["type"])
+    ("stations", ["name", "area"]),
+    ("locations", ["id", "name", "address", "station", "minutes_to_walk"]),
+    # ("station_lines", ["station", "line", "position"]),
+    # ("station_lines", ["station", "line", "position"]),
+    # ("tags", ["type"])
 ]
+
+SETUP_SCRIPTS = [
+    "set_identities"
+]
+
 
 ABSOLUTE_PATH = os.path.dirname(__file__)
 SCHEMA_DIRECTORY = "schema"
@@ -59,10 +68,16 @@ def reset() -> None:
             data = list(
                 map(lambda x: tuple(x),
                     pd.read_csv(_get_data_file_string(csv[0] + ".csv"), sep=CSV_SEPARATOR)[csv[1]].to_records(index=False))
-                )
-            args_str = CSV_SEPARATOR.join(cur.mogrify(_get_csv_symbols(len(csv[1])), d).decode('utf-8') for d in data)
-            cur.execute("INSERT INTO " + csv[0] + " (" + (CSV_SEPARATOR.join(map(str, csv[1]))) + ") VALUES " + args_str)
+            )
+            args_str = ','.join(cur.mogrify(_get_csv_symbols(len(csv[1])), d).decode('utf-8') for d in data)
+            cur.execute("INSERT INTO " + csv[0] + " (" + (','.join(map(str, csv[1]))) + ") VALUES " + args_str)
 
+    with conn.cursor() as cur:
+        for name in SETUP_SCRIPTS:
+            with open(_get_schema_file_string(name + ".sql")) as file:
+                cur.execute(file.read())
+
+    conn.cursor().execute("INSERT INTO locations (address,station,name,minutes_to_walk) VALUES ('Philip Heymans Alle 17 2900 Hellerup','Hellerup','Waterfront Shopping Center',14)")
     conn.commit()
     conn.close()
 
