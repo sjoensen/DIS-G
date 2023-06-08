@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS lines (
+    name VARCHAR PRIMARY KEY,
+    length INT
+);
