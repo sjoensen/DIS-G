@@ -1,11 +1,11 @@
 CREATE TABLE station_lines (
-    station VARCHAR,
-    line VARCHAR,
-    position INT, -- add constraint that position should be between 0 and line.length - 1
-    CONSTRAINT pk_station_lines PRIMARY KEY (station, line),
-    CONSTRAINT uk_line_position UNIQUE (line, position),
-    CONSTRAINT fk_stations FOREIGN KEY(station) REFERENCES stations(name),
-    CONSTRAINT fk_lines FOREIGN KEY(line) REFERENCES lines(name)
+    station VARCHAR NOT NULL,
+    line VARCHAR NOT NULL,
+    position INT NOT NULL, -- add constraint that position should be between 0 and line.length - 1
+    PRIMARY KEY (station, line),
+    UNIQUE (line, position),
+    FOREIGN KEY(station) REFERENCES stations(name),
+    FOREIGN KEY(line) REFERENCES lines(name)
 );
 
 CREATE FUNCTION check_station_lines_position() RETURNS TRIGGER AS $$
