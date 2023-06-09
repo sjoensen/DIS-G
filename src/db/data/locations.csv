@@ -9,7 +9,7 @@ id,address,station,name,minutes_to_walk
 8,Peter Bangs Vej 163A 2000 Frederiksberg,KB Hallen,KB Hallen,0
 9,Roskildevej 131 2500 Valby,Ålholm,Ålholm,0
 10,Ansgars Allé 20 2500 Valby,Danshøj,Danshøj,0
-11,Vigerslev Allé 141 2500 Valby,Vigerslev,Vigerslev,0
+11,Vigerslev Allé 141 2500 Valby,Vigerslev Allé,Vigerslev,0
 12,Carl Jacobsens vej 19 2500 Valby,Ny Ellebjerg,Ny Ellebjerg,0
 13,Tuborg Havnevej 7 2900 Hellerup,Hellerup,Eksperimentariet,15
 14,Rymarksvej 75B 2900 Hellerup,Hellerup,Toilet,16
@@ -17,3 +17,121 @@ id,address,station,name,minutes_to_walk
 16,Philip Heymans Alle 17 2900 Hellerup,Hellerup,Waterfront Shopping Center,14
 17,Ryvangs Allé 79 2900 Hellerup,Hellerup,7-eleven,0
 18,Ryvangs Allé 89a 2900 Hellerup,Hellerup,Emmerys,2
+19,Ryvangs Allé 87 2900 Hellerup,Hellerup,Netto,1
+20,Ryvangs Allé 2900 Hellerup,Hellerup,Quickstop Kebab,3
+21,Hans Knudsens Plads 18 2100 København Ø,Ryparken,Lidl,3
+22,Æbeløgade 11 2100 København Ø,Ryparken,Rema1000,6
+23,Æbeløgade 20 2100 København Ø,Ryparken,365Discount,7
+24,Lyngbyvej 153 2100 København Ø,Ryparken,Ryparken apotek,7
+25,Vognmandsmarken 85 2100 København Ø,Ryparken,Kildevældsparken,8
+26,Lyngbyvej 90 2100 København Ø,Ryparken,Toilet,4
+27,Vognmandsmarken 69 2100 København Ø,Ryparken,Toilet,8
+28,Lygten 49 2400 København,Bispebjerg,Lidl,5
+29,Lygten 53 2400 København,Bispebjerg,Netto,5
+30,Reimdalsgade 39 2200 København,Bispebjerg,Ali bageri,7
+31,Bispebjerg Bakke 12 2400 København NV,Bispebjerg,Lersøparken,3
+32,Borgmestervangen 5 2200 København N,Bispebjerg,Mimersparken,1
+33,Haraldsgade 6 2200 København N,Bispebjerg,Toilet,8
+34,Valhalsgade 4 2200 København N,Bispebjerg,Toilet,9
+35,Nørrebrogade 210 2200 København,Bispebjerg,Superkilen,6
+36,Tagensvej 167 2400 København NV,Bispebjerg,Fabios Pizzaria,5
+37,Nørrebrogade 224 2200 København N,Nørrebro, Apotek,2
+38,Landsdommervej 1 2400 København NV,Bispebjerg,Elite Købmand,5
+39,Lygten 2L 2400 København NV,Nørrebro,Nørrebro Bycenter,4
+40,Lygten 2L 2400 København NV,Bispebjerg,Nørrebro bycenter,7
+41,Mimersgade 124 2200 København N,Bispebjerg,Føtex,9
+42,Mimers Plads 14 2200 København N,Bispebjerg,Toilet,10
+43,Hamletsgade 2 2200 København N,Bispebjerg,Hamlet Apotek,7
+44,Borups Allé 126 2000 Frederiksberg,Fuglebakken,Menu,6
+45,Nordre Fasanvej 207 2000 Frederiksberg,Fuglebakken,Lidl,6
+46,Mågevej 16 2400 København NV,Fuglebakken,Skruens,7
+47,Stærevej 74 2400 København NV,Fuglebakken,Netto,12
+48,Borups Allé 190 2400 København NV,Fuglebakken,Gandiparken,7
+49,Rødkildevej 15 2400 København NV,Fuglebakken,Rødkilde Park,19
+50,Solkrogen 8 2700 Brønshøj,Fuglebakken,Degnemosen,13
+51,Genforeningspladsen 54 2400 København NV,Fuglebakken,Genforeningspladsen,14
+52,Mimersgade 124 2200 København N,Nørrebro,Føtex,1
+53,Solkrogen 8 2700 Brønshøj,Fuglebakken,Toilet,13
+54,Hillerødgade 23B 2200 København N,Fuglebakken,Toilet,10
+55,Godthåbsvej 96 2000 Frederiksberg,Fuglebakken,Sushi Factory,12
+56,Borgmestervangen 5 2200 København N,Nørrebro,Netto,2
+57,Godthåbsvej 199 2720 Vanløse,Grøndal,Ricco's Kaffebar,5
+58,Godthåbsvej 195 2720 Vanløse,Grøndal,Netto,4
+59,Frederikssundsvej 5 2400 København N,Nørrebro,Rema,1
+60,Godthåbsvej 173 2720 Vanløse,Grøndal,Fru Jensens Fristelser,3
+61,Godthåbsvej 142 2000 Frederiksberg,Grøndal,Min Købmand,7
+62,Grøndals Parkvej 125 2720 Vanløse,Flintholm,Toilet,10
+63,Flintholm Alle 55 1 sal 2000 Frederiksberg,Flintholm,Impact Roasters,1
+64,Nørrebrogade 224 2200 København N,Nørrebro,Khorn,2
+65,Dirch Passers Allé 84 2000 Frederiksberg,Flintholm,Min Thai,2
+66,Lygten 2A 2400 København NV,Nørrebro,Byens Pølser,1
+67,Dirch Passers Allé 25 2000 Frederiksberg,Flintholm,Teppan House,2
+68,Nordre Fasanvej 269,Nørrebro,Harry's Place,2
+69,Dirch Passers Allé 17 2000 Frederiksberg,Flintholm,Korean BBQ,5
+70,Jernbane Allé 31 2720 Vanløse,Flintholm,Apotek Jernbanegade,11
+71,Nørrebrogade 208 2200 København N,Nørrebro,Nørrebro Bibliotek,6
+72,Vanløse Torv 1 Suite 123 2720 København,Flintholm,Vanløse Apotek,11
+73,Peter Bangs Vej 100 2000 Frederiksberg,Flintholm,Netto,12
+74,Ålekistevej 47 2720 Vanløse,Flintholm,365Discount,16
+75,Grøndals Parkvej 125 2720 Vanløse,KB Hallen,Toilet,9
+76,Ålholm Plads 2 2500 Valby,KB Hallen,Toilet,11
+77,Mimersparken,Nørrebro,Mimersparken,4
+78,Superkilen,Nørrebro,Superkilen,4
+79,Nørrebroparken,Nørrebro,Nørrebroparken,8
+80,Peter Bangs Vej 147 2000 Frederiksberg,KB Hallen,Restaurant Granen,1
+81,Folmer Bendtsens Plads,Nørrebro,Bicycle Parking,1
+82,Peter Bangs Vej 234 2500 Valby,KB Hallen,Service Kiosken,5
+83,Peter Bangs Vej 148 2000 Frederiksberg,KB Hallen,Qvisten,1
+84,Peter Bangs Vej 223 2500 København,KB Hallen,Columbia Valby,5
+85,Ålekistevej 47 2720 Vanløse,KB Hallen,365Discount,12
+86,Ålekistevej 82 2720 København,KB Hallen,Kebab House,16
+87,Ålekistevej 61 2720 København,KB Hallen,Del Nonno,14
+88,Lyngsies Plads 2400 København NV,Nørrebro,Drinking water,2
+89,Junggreensvej 14B 2000 Frederiksberg,KB Hallen,Flintholm Kirke,6
+90,Peter Bangs Vej 100 2000 Frederiksberg,KB Hallen,Netto,9
+91,Roskildevej 168 2500 Valby,KB Hallen,Lidl,14
+92,Peter Bangs Vej 265A 2500 København,KB Hallen,Damhussøen,20
+93,Mimers Plads 14 2200 København N,Nørrebro,Toilet,1
+94,Hillerødgade 23B 2200 København N,Nørrebro,Toilet,9
+95,Engdraget 24 2500 Valby,Danshøj,Toilet,19
+96,Ålholm Plads 2 2500 Valby,Ålholm,Toilet,3
+97,Engdraget 24 2500 Valby,Ålholm,Toilet,12
+98,Ålekistevej 47 2720 Vanløse,Ålholm,365Discount,17
+99,Ålekistevej 82 2720 København,Ålholm,Kebab House,16
+100,Ålekistevej 61 2720 København,Ålholm,Del Nonno,15
+101,Kulbanevej 16 2500 Valby,Danshøj,Toilet,20
+102,Engdals allé 20 2500 Valby,Danshøj,Toilet,25
+103,Vigerslevvej 125 2500 København,Danshøj,Dagli'Brugsen,16
+104,Junggreensvej 14B 2000 Frederiksberg,Ålholm,Flintholm Kirke,15
+105,Peter Bangs Vej 100 2000 Frederiksberg,Ålholm,Netto,17
+106,Roskildevej 168 2500 Valby,Ålholm,Lidl,7
+107,Peter Bangs Vej 265A 2500 København,Ålholm,Damhussøen,10
+108,Vigerslev Allé 124 2500 København,Danshøj,Royal Indian,10
+109,Roskildevej 148 2500 København,Ålholm,AI sushi,3
+110,Ålholmvej 17 2500 København,Ålholm,Chai Shai,4
+111,Ålholmvej 13 2500 København,Ålholm,Laguna Pizza,5
+112,Bramslykkevej 18B 2500 København,Ålholm,Ålholm Kirke,3
+113,Valby Langgade 185 2500 København,Ålholm,Bagerdygtigt,6
+114,Kulbanevej 16 2500 Valby,Vigerslev Allé,Toilet,12
+115,Valby Langgade 195A 2500 København,Ålholm,Burgers & Bagels,5
+116,Valby Langgade 177 2500 København,Ålholm,Café Istanbul,8
+117,Engdals allé 20 2500 Valby,Vigerslev Allé,Toilet,17
+118,Nordens Pl. 8b 2000 Frederiksberg,Ålholm,Menu,8
+119,Toftegårds Plads 2F 2500 Valby,Vigerslev Allé,Toilet,16
+120,Toftegårds Plads 6F 2500 Valby,Vigerslev Allé,Toilet,16
+121,Vigerslevvej 125 2500 København,Danshøj,Dagli'Brugsen,15
+122,Vigerslev Allé 124 2500 København,Danshøj,Royal Indian,5
+123,Toftegårds Plads 2F 2500 Valby,Ny Ellebjerg,Toilet,18
+124,Kulbanevej 12 2500 Valby,Ny Ellebjerg,Kulbaneparken,19
+125,Toftegårds Plads 6F 2500 Valby,Ny Ellebjerg,Toilet,18
+126,Hammelstrupvej 41 2450 København SV,Ny Ellebjerg,Toilet,15
+127,Frugthaven 16 2500 Valby,Ny Ellebjerg,Dagli'Brugsen,15
+128,Hammelstrupvej 41 2450 København SV,Ny Ellebjerg,Park,15
+129,Carl Jacobsens Vej 17 K 2500 Valby,Ny Ellebjerg,Asian Palace,2
+130,Carl Jacobsens Vej 17F 2500 Valb,Ny Ellebjerg,Buns and Patties,2
+131,Trekronergade 147b 2500 Valby,Ny Ellebjerg,Emmerys,4
+132,Trekronergade 143 2500 Valby,Ny Ellebjerg,Pizza Mand,4
+133,Ellebjergvej 142 2450 København SV,Ny Ellebjerg,Burger King,7
+134,Gammel Køge Landevej 103 2500 Valby,Ny Ellebjerg,McDonald's,10
+135,Gammel Køge Landevej 84 2500 Valby,Ny Ellebjerg,Føtex Food,6
+136,Carl Jacobsens Vej 19L 2500 Valby,Ny Ellebjerg,SPAR,2

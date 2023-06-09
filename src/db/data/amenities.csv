@@ -1,8 +1,62 @@
-id,name,location
-0,Eksperimentariet,Hellerup
-1,Toilet,Hellerup
-2,Ryvangs Naturplads,Hellerup
-3,Waterfront Shopping Center - toilet,Hellerup
-4,7-eleven,Hellerup
-5,Emmerys,Hellerup
-6,Waterfront Shopping Center,Hellerup
+id,name
+1,Toilet
+2,Toilet
+3,Eksperimentariet
+4,Park
+5,7-eleven
+6,Emmerys
+7,Waterfront Shopping Center
+8,Espresso House
+9,Netto
+10,Wulf & Konstali
+11,Apotek
+12,Lidl
+13,Rema1000
+14,365Discount
+15,Ali Bageri
+16,Taffelbay
+17,Fabios Pizzaria
+18,Elite Købmand
+19,Nørrebros Bycenter
+20,Føtex
+21,Hjertestarter
+22,Khorn
+23,Byens Pølser
+24,Harry's Place
+25,Menu
+26,Skruens
+27,Sushi Factory
+28,Ricco's kaffebar
+29,Fru Jensens Fristelser
+30,Min Købmand
+31,Impact Roasters
+32,Min Thai
+33,Teppan House
+34,Korean BBQ
+35,Bibliotek
+36,Restaurant Granen
+37,Qvisten
+38,Service Kiosken
+39,Columbia Valby
+40,Kebab House
+41,Del Nonno
+42,Kirke
+43,Damhussøen
+44,Bicycle Parking
+45,Drinking water
+46,Chai Shai
+47,Laguna Pizza
+48,AI sushi
+49,Bagerdygtigt
+50,Burgers & Bagels
+51,Café Istanbul
+52,Dagli'Brugsen
+53,Royal Indian
+54,Kebab Station
+55,Asian Palace
+56,Buns and Patties
+57,Pizza Mand
+58,McDonalds
+59,Burger King
+60,Føtex Food
+61,SPAR

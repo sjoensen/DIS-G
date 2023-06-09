@@ -1,32 +1,100 @@
 amenity_id,tag
 1,Free
-4,Convenience store
-0,Paid
-0,Family-friendly
-0,Attractions
 1,Toilet
-2,Park
-3,Toilet
-3,Free
-4,Fast-food
-5,Bakery
-6,Restaurant
-6,Coffeeshop
+2,Paid
+2,Toilet
+3,Attraction
+3,Family-friendly
+3,Paid
+4,Park
+4,Family-friendly
+5,Convenience store
+5,Over-the-counter medicine
+5,Prepared meals
 6,Bakery
-
-
-#type
-#Toilet
-#Pissoir
-#Free
-#Pay-to-use
-#Restaurant
-#Fast-food
-#Convenience store
-#Grocery store
-#Family-friendly
-#Park
-#Attractions
-#Museum
-#Coffeshop
-#Bakery
+6,Pastries
+7,Shopping Centre
+8,Coffeeshop
+8,Prepared meals
+8,Pastries
+9,Groceries
+9,Prepared meals
+10,Restaurant
+11,Over-the-counter medicine
+11,Prescription medicine
+11,Pharmacy
+12,Groceries
+12,Prepared meals
+13,Groceries
+13,Prepared meals
+14,Groceries
+14,Prepared meals
+15,Bakery
+15,Pastries
+16,Bakery
+16,Pastries
+17,Fast-food
+18,Groceries
+19,Shopping Centre
+20,Groceries
+20,Bakery
+20,Over-the-counter medicine
+20,Prepared meals
+21,Defibrilator
+22,Bakery
+22,Pastries
+23,Fast-food
+24,Fast-food
+25,Groceries
+25,Prepared meals
+26,Bakery
+26,Pastries
+27,Restaurant
+28,Coffeeshop
+28,Pastries
+29,Café
+29,Pastries
+30,Groceries
+31,Coffeeshop
+31,Pastries
+32,Restaurant
+33,Restaurant
+34,Restaurant
+35,Library
+35,Free
+36,Restaurant
+37,Restaurant
+38,Convenience store
+39,Restaurant
+40,Fast-food
+41,Fast-food
+42,Attraction
+42,Family-friendly
+43,Attraction
+43,Family-friendly
+44,Bicycle parking
+44,Free
+45,Free
+46,Restaurant
+47,Fast-food
+48,Restaurant
+49,Bakery
+49,Pastries
+50,Restaurant
+51,Restaurant
+52,Groceries
+52,Over-the-counter medicine
+53,Restaurant
+54,Fast-food
+55,Restaurant
+56,Fast-food
+57,Fast-food
+58,Fast-food
+59,Fast-food
+60,Groceries
+60,Over-the-counter medicine
+60,Prepared meals
+61,Groceries
+61,Over-the-counter medicine
+61,Prepared meals
+61,Pastries
