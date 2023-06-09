@@ -17,7 +17,7 @@ SCHEMA_FILES = [
     "amenities",
     "tags",
     "amenity_tags",
-    "amenity_locations"
+    "location_amenities",
 ]
 
 # [ filename, [ column_names ] ]
@@ -25,9 +25,11 @@ CSV_FILES = [
     ("lines", ["name", "length"]),
     ("stations", ["name", "area"]),
     ("locations", ["id", "name", "address", "station", "minutes_to_walk"]),
-    # ("station_lines", ["station", "line", "position"]),
-    # ("station_lines", ["station", "line", "position"]),
-    # ("tags", ["type"])
+    ("station_lines", ["station", "line", "position"]),
+    ("amenities", ["id", "name"]),
+    ("tags", ["type"]),
+    ("location_amenities", ["amenity_id", "location_id"]),
+    ("amenity_tags", ["amenity_id", "tag"]),
 ]
 
 SETUP_SCRIPTS = [
@@ -77,7 +79,6 @@ def reset() -> None:
             with open(_get_schema_file_string(name + ".sql")) as file:
                 cur.execute(file.read())
 
-    conn.cursor().execute("INSERT INTO locations (address,station,name,minutes_to_walk) VALUES ('Philip Heymans Alle 17 2900 Hellerup','Hellerup','Waterfront Shopping Center',14)")
     conn.commit()
     conn.close()
 

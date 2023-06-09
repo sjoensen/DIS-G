@@ -1,4 +1,5 @@
 flask
+flask_login
 wtforms
 psycopg2
 python-dotenv
