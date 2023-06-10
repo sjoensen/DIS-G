@@ -1,6 +1,5 @@
 DROP TRIGGER IF EXISTS check_station_lines_position_is_valid ON station_lines;
 DROP FUNCTION IF EXISTS check_station_lines_position();
-DROP TABLE IF EXISTS amenity_locations;
 DROP TABLE IF EXISTS location_amenities;
 DROP TABLE IF EXISTS amenity_tags;
 DROP TABLE IF EXISTS tags;

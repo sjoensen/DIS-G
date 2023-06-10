@@ -47,19 +47,19 @@ _connection = None
 
 
 def _get_connection():
+    global _connection
     if _connection is not None:
         return _connection
     else:
         load_dotenv()
 
-        conn = psycopg2.connect(
+        _connection = psycopg2.connect(
             host="localhost",
             database=os.getenv('DB_NAME'),
             user=os.getenv('DB_USERNAME'),
             password=os.getenv('DB_PASSWORD')
         )
-
-        return conn
+        return _connection
 
 
 def cursor():
