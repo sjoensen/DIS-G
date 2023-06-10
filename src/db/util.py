@@ -4,6 +4,7 @@ import psycopg2
 import numpy as np
 from dotenv import load_dotenv
 from psycopg2.extensions import register_adapter, AsIs
+from psycopg2.extras import RealDictCursor
 
 CSV_SEPARATOR = ','
 
@@ -42,30 +43,41 @@ SCHEMA_DIRECTORY = "schema"
 DATA_DIRECTORY = "data"
 
 
-def connect():
-    load_dotenv()
+_connection = None
 
-    conn = psycopg2.connect(
-        host="localhost",
-        database=os.getenv('DB_NAME'),
-        user=os.getenv('DB_USERNAME'),
-        password=os.getenv('DB_PASSWORD')
-    )
 
-    return conn
+def _get_connection():
+    global _connection
+    if _connection is not None:
+        return _connection
+    else:
+        load_dotenv()
+
+        _connection = psycopg2.connect(
+            host="localhost",
+            database=os.getenv('DB_NAME'),
+            user=os.getenv('DB_USERNAME'),
+            password=os.getenv('DB_PASSWORD')
+        )
+        return _connection
+
+
+def cursor():
+    return _get_connection().cursor(cursor_factory=RealDictCursor)
+
+
+def commit():
+    _get_connection().commit()
 
 
 def reset() -> None:
     _register_adapters()
 
-    conn = connect()
-
-    with conn.cursor() as cur:
+    with cursor() as cur:
         for name in SCHEMA_FILES:
             with open(_get_schema_file_string(name + ".sql")) as file:
                 cur.execute(file.read())
 
-    with conn.cursor() as cur:
         for csv in CSV_FILES:
             data = list(
                 map(lambda x: tuple(x),
@@ -74,13 +86,11 @@ def reset() -> None:
             args_str = ','.join(cur.mogrify(_get_csv_symbols(len(csv[1])), d).decode('utf-8') for d in data)
             cur.execute("INSERT INTO " + csv[0] + " (" + (','.join(map(str, csv[1]))) + ") VALUES " + args_str)
 
-    with conn.cursor() as cur:
         for name in SETUP_SCRIPTS:
             with open(_get_schema_file_string(name + ".sql")) as file:
                 cur.execute(file.read())
 
-    conn.commit()
-    conn.close()
+    commit()
 
 
 def get_secret_key() -> str:
