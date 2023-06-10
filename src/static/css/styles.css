@@ -2,3 +2,9 @@
 /*@import "example.css";*/
 /*@import "extra.css";*/
 @import "search.css";
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

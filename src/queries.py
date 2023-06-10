@@ -2,6 +2,19 @@ from src.db.util import cursor
 from src.models import Tag, Station, Line, Location
 
 
+def get_locations_with_tags(line: str, origin: str, destination: str, tags: [str]):
+    sql =\
+    f"""
+    SELECT type FROM tags
+    WHERE type IN {tuple(tags)}
+    """
+
+    print(sql)
+    with cursor() as cur:
+        cur.execute(sql)
+        return cur.fetchall()
+
+
 def test():
     get_tags()
 

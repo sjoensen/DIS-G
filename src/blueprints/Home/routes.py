@@ -1,7 +1,7 @@
 from flask import render_template, request, Blueprint
 
 from src.forms import SearchForm
-from src.queries import get_tags, get_lines, get_stations, get_locations
+from src.queries import get_tags, get_lines, get_stations, get_locations, get_locations_with_tags
 
 Home = Blueprint('home', __name__)
 
@@ -18,6 +18,12 @@ def search():
     form.tags.choices = [(t.type, t.type) for t in get_tags()]
 
     if request.method == 'POST':
-        results = get_locations()
+        print(form.tags.data)
+        results = get_locations_with_tags(
+            form.line.data,
+            form.origin.data,
+            form.destination.data,
+            form.tags.data
+        )
 
     return render_template("pages/search.html", form=form, results=results)
