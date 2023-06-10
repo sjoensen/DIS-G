@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        main {
+            box-sizing: border-box;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+{#    {% include 'components/filter.html' %}#}
+    <div class="row">
+        <div class="column search-input">
+            <form method="POST" action="{{ url_for('home.search') }}">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.line() }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.origin() }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.destination() }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.tags() }}
+                </div>
+
+                <div>
+                    {{ form.submit(class="btn") }}
+                    <a href="{{ url_for('home.search') }}" class="btn">Clear filters</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="column search-results">
+            {% if results|length %}
+                <table>
+                    <tr>
+                        <th>Location</th>
+                    </tr>
+                    {% for r in results %}
+                        <tr>
+                            <td>{{ r.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+        {% else %}
+        {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        let food_select = document.get.elementById('food');
+
+        food_select.onchange = function(){
+            food = food_select.value;
+            alert(food);
+        }
+    </script>
+{% endblock %}
