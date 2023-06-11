@@ -6,11 +6,11 @@ from src.queries import get_locations
 Location = Blueprint('location', __name__)
 
 TABLE_COLUMNS = [
-    ("id", "ID"),
-    ("name", "Name"),
-    ("address", "Address"),
-    ("station", "Station"),
-    ("minutes_to_walk", "Minutes to walk"),
+    ("id", "ID", "data"),
+    ("name", "Name", "data"),
+    ("address", "Address", "data"),
+    ("station", "Station", "data"),
+    ("minutes_to_walk", "Minutes to walk", "data"),
 ]
 
 
@@ -18,4 +18,4 @@ TABLE_COLUMNS = [
 def locations():
     table_data = get_locations()
     form = LocationForm()
-    return render_template("pages/search.html", form=form, columns=TABLE_COLUMNS, table_data=table_data)
+    return render_template("pages/search.html", method="POST", action="home.search", form=form, columns=TABLE_COLUMNS, table_data=table_data)

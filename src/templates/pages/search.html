@@ -12,12 +12,12 @@
 
     <div class="row">
         <div class="column search-input">
-            <form method="POST" action="{{ url_for('home.search') }}">
+            <form method={{ method }} action="{{ url_for(action) }}">
                 {{ form.hidden_tag() }}
                 {% for field in form %}
                     {% if field.label.text == "Search" %}
                         <div class="form-group">
-                            <label><a href="{{ url_for('home.search') }}" class="btn">Clear filters</a></label>
+                            <label><a href="{{ url_for(action) }}" class="btn">Clear filters</a></label>
                             <span>{{ form.submit(class="btn") }}</span>
                         </div>
                     {% elif field.label.text == "CSRF Token" %}
@@ -43,7 +43,15 @@
                     {% for r in table_data %}
                         <tr>
                             {% for col in columns %}
-                                <td>{{ r[col[0]] }}</td>
+                                {% if col[2] == "data" %}
+                                    <td>{{ r[col[0]] }}</td>
+                                {% elif col[2] == "edit" %}
+                                    <td style="cursor: pointer;">&#9998;</td>
+                                {% elif col[2] == "delete" %}
+                                    <form action="{{ url_for(col[0], type=r.type) }}" method=post>
+                                        <td style="cursor: pointer;"><input type=submit value=&#x2716;></td>
+                                    </form>
+                                {% endif %}
                             {% endfor %}
                         </tr>
                     {% endfor %}

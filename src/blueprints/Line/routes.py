@@ -6,8 +6,8 @@ from src.queries import get_lines
 Line = Blueprint('line', __name__)
 
 TABLE_COLUMNS = [
-    ("name", "Name"),
-    ("length", "Length"),
+    ("name", "Name", "data"),
+    ("length", "Length", "data"),
 ]
 
 
@@ -15,4 +15,4 @@ TABLE_COLUMNS = [
 def lines():
     table_data = get_lines()
     form = LineForm()
-    return render_template("pages/search.html", form=form, columns=TABLE_COLUMNS, table_data=table_data)
+    return render_template("pages/search.html", method="POST", action="home.search", form=form, columns=TABLE_COLUMNS, table_data=table_data)

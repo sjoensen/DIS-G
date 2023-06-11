@@ -18,11 +18,11 @@ SPECIAL_CHOICES = [
 ]
 
 TABLE_COLUMNS = [
-    ("station", "Station"),
-    ("minutes_to_walk", "Minutes to walk"),
-    ("name", "Name"),
-    ("address", "Address"),
-    ("tag", "Tag"),
+    ("station", "Station", "data"),
+    ("minutes_to_walk", "Minutes to walk", "data"),
+    ("name", "Name", "data"),
+    ("address", "Address", "data"),
+    ("tag", "Tag", "data"),
 ]
 
 
@@ -34,7 +34,7 @@ def search():
     form.line.choices = [(l.name, l.name) for l in get_lines()]
     stations = get_stations()
     form.origin.choices = [(s.name, s.name) for s in stations]
-    form.destination.choices = [("destination_none","None")] + [("destination_all", "All")] + [(s.name, s.name) for s in stations]
+    form.destination.choices = [("destination_all", "All")] + [("destination_none","None")] + [(s.name, s.name) for s in stations]
     form.tags.choices = [(t.type, t.type) for t in get_tags()]
     form.specials.choices = SPECIAL_CHOICES
 
@@ -51,9 +51,14 @@ def search():
             form.specials.data
         )
 
-    return render_template("pages/search.html", form=form, table_data=results, columns=TABLE_COLUMNS)
+    return render_template("pages/search.html", method="POST", action="home.search", form=form, table_data=results, columns=TABLE_COLUMNS)
 
 
 @Home.route("/about/")
 def about():
-    render_template("pages/about.html")
+    return render_template("pages/about.html")
+
+
+@Home.route("/map/")
+def show_map():
+    return render_template("pages/map.html")

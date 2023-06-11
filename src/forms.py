@@ -37,7 +37,6 @@ class SearchForm(FlaskForm):
 
 class TagForm(FlaskForm):
     name = StringField("Name")
-    old_name = HiddenField("old_name")
 
 
 class LocationForm(FlaskForm):

@@ -14,7 +14,8 @@ main {
 }
 
 main {
-  margin: 0.5em;
+    margin: 0.5em;
+    margin-bottom: 3em;
 }
 
 body {
