@@ -50,6 +50,27 @@ def search():
             form.max_line_proximity.data,
             form.specials.data
         )
+    elif request.method == 'ALL_TAGS':
+        results = get_stations_with_all_tags(
+            form.line.data,
+            form.origin.data,
+            form.destination.data,
+            form.tags.data,
+            form.min_walk_minutes.data,
+            form.max_walk_minutes.data,
+            form.min_line_proximity.data,
+            form.max_line_proximity.data,
+            form.specials.data
+        )
+    elif request.method == 'HIGHEST_INCIDENCE':
+        results = find_highest_tag_incidence(
+            form.line.data,
+            form.origin.data,
+            form.destination.data,
+            form.tags.data,
+            form.min_walk_minutes.data,
+            form.max_walk_minutes.data
+        )
 
     return render_template("pages/search.html", method="POST", action="home.search", form=form, table_data=results, columns=TABLE_COLUMNS)
 
