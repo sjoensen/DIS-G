@@ -21,20 +21,8 @@ def filtered_search(
         max_minutes_to_walk,
         min_line_proximity,
         max_line_proximity,
-        selected_sorting
+        sorting
 ):
-    min_minutes_to_walk = 0 if min_minutes_to_walk is None else min_minutes_to_walk
-    max_minutes_to_walk = 10000 if max_minutes_to_walk is None else max_minutes_to_walk
-    min_line_proximity = 0 if min_line_proximity is None else min_line_proximity
-    max_line_proximity = 10000 if max_line_proximity is None else max_line_proximity
-    sorting = selected_sorting.replace("'", "")
-    sorting = sorting.replace("(", "")
-    sorting = sorting.replace(")", "")
-    split = sorting.split(", ")
-    second = "proximity" if split[0] != "proximity" else "minutes_to_walk"
-    sorting = f"""{split[0]} {split[1]}, {second} ASC"""
-    # TODO: Generalise minutes to walk < 20 to MAX walking time and Minutes_to_walk > 5 to MINIMUM walking time
-
     sql_origin_search = \
         f"""
             FROM station_lines SLOrig, station_lines SL
@@ -95,24 +83,12 @@ def filtered_search(
         cur.execute(sql)
         return cur.fetchall()
 
+
 def get_stations_with_all_tags(
         line: str, origin: str, destination: str, tags: [str],
         min_minutes_to_walk, max_minutes_to_walk,
         min_line_proximity, max_line_proximity,
-        selected_sorting ):
-
-    min_minutes_to_walk = 0 if min_minutes_to_walk is None else min_minutes_to_walk
-    max_minutes_to_walk = 10000 if max_minutes_to_walk is None else max_minutes_to_walk
-    min_line_proximity = 0 if min_line_proximity is None else min_line_proximity
-    max_line_proximity = 10000 if max_line_proximity is None else max_line_proximity
-    #sorting = selected_sorting.replace("'", "")
-    #sorting = sorting.replace("(", "")
-    #sorting = sorting.replace(")", "")
-    #split = sorting.split(", ")
-    #second = "proximity" if split[0] != "proximity" else "minutes_to_walk"
-    #sorting = f"""{split[0]} {split[1]}, {second} ASC"""
-    sorting = "minutes_to_walk ASC"
-
+        sorting ):
     numstr = "AT"+str(len(tags)-1)
     join_string = "SELECT slstation AS station, " + numstr + ".name, " + numstr + ".tag, "
     join_string += numstr + ".minutes_to_walk, " + numstr + ".address "
@@ -146,7 +122,7 @@ def get_stations_with_all_tags(
         )) AS S
         ON {numstr}.station=S.slstation
         WHERE(
-        minutes_to_walk BETWEEN {min_minutes_to_walk} AND {max_minutes_to_walk}
+        {numstr}.minutes_to_walk BETWEEN {min_minutes_to_walk} AND {max_minutes_to_walk}
         AND proximity BETWEEN {min_line_proximity} AND {max_line_proximity}
         )
         ORDER BY {sorting}
@@ -164,7 +140,7 @@ def find_highest_tag_incidence(
 
     bsql=\
     f"""
-    SELECT station, (COUNT(*)) as count
+    SELECT station, (COUNT(*)) as tag
     FROM locations L
     NATURAL JOIN (
         SELECT amenity_id, location_id AS id
@@ -191,7 +167,7 @@ def find_highest_tag_incidence(
     WHERE L.minutes_to_walk < {max_minutes_to_walk}
     AND L.minutes_to_walk > {min_minutes_to_walk}
     GROUP BY (station, proximity)
-    ORDER BY count DESC, proximity ASC
+    ORDER BY count(*) DESC, proximity ASC
     LIMIT 1
     """
     print(bsql)

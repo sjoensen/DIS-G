@@ -27,7 +27,7 @@ class SearchForm(FlaskForm):
     line = SelectField("Line")
     origin = SelectField("Origin")
     destination = SelectField("Destination")
-    search_type = SelectField("Search type")
+    # search_type = SelectField("Search type")
     specials = SelectField("Sorting")
     min_walk_minutes = IntegerField("Min walk time, in minutes")
     max_walk_minutes = IntegerField("Max walk time, in minutes")
