@@ -1,0 +1,12 @@
+.form-group {
+    margin-bottom: var(--form-separation);
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group > label {
+    display: inline-block;
+    width: var(--form-label-width);
+}

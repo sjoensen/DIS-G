@@ -15,34 +15,54 @@
         <div class="column search-input">
             <form method="POST" action="{{ url_for('home.search') }}">
                 {{ form.hidden_tag() }}
-
                 <div class="form-group">
-                    <div>{{ form.line.label }}</div>
-                    <div>{{ form.line }}</div>
-                    <br>
+                    <label><a href="{{ url_for('home.search') }}" class="btn">Clear filters</a></label>
+                    <span>{{ form.submit(class="btn") }}</span>
                 </div>
 
                 <div class="form-group">
-                    <div>{{ form.origin.label }}</div>
-                    <div>{{ form.origin }}</div>
-                    <br>
+                    <label>{{ form.line.label }}</label>
+                    <span>{{ form.line }}</span>
                 </div>
 
                 <div class="form-group">
-                    <div>{{ form.destination.label }}</div>
-                    <div>{{ form.destination }}</div>
-                    <br>
+                    <label>{{ form.origin.label }}</label>
+                    <span>{{ form.origin }}</span>
                 </div>
 
                 <div class="form-group">
-                    <div>{{ form.tags.label }}</div>
-                    <div>{{ form.tags }}</div>
-                    <br>
+                    <label>{{ form.destination.label }}</label>
+                    <span>{{ form.destination }}</span>
                 </div>
 
-                <div>
-                    <div>{{ form.submit(class="btn") }}</div>
-                    <div><a href="{{ url_for('home.search') }}" class="btn">Clear filters</a></div>
+                <div class="form-group">
+                    <label>{{ form.min_walk_minutes.label }}</label>
+                    <span>{{ form.min_walk_minutes }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ form.max_walk_minutes.label }}</label>
+                    <span>{{ form.max_walk_minutes }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ form.min_line_proximity.label }}</label>
+                    <span>{{ form.min_line_proximity }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ form.max_line_proximity.label }}</label>
+                    <span>{{ form.max_line_proximity }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ form.specials.label }}</label>
+                    <span>{{ form.specials }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ form.tags.label }}</label>
+                    <span>{{ form.tags }}</span>
                 </div>
             </form>
         </div>

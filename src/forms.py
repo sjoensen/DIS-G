@@ -9,6 +9,14 @@ class LookupForm(FlaskForm):
     testB = BooleanField('Test')
 
 
+class IntRangeField(IntegerField):
+    widget = widgets.RangeInput()
+
+
+class SearchResultsTable():
+    widget = widgets.TableWidget()
+
+
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
@@ -17,6 +25,12 @@ class MultiCheckboxField(SelectMultipleField):
 class SearchForm(FlaskForm):
     tags = MultiCheckboxField("Tags")
     line = SelectField("Line")
+    min_walk_minutes = IntegerField("Min walk time, in minutes")
+    max_walk_minutes = IntegerField("Max walk time, in minutes")
+    min_line_proximity = IntegerField("Min amount of stops")
+    max_line_proximity = IntegerField("Max amount of stops")
+    specials = SelectField("Sorting")
+    search_results = SearchResultsTable()
     origin = SelectField("Origin")
-    destination = SelectField("Destination (optional)")
+    destination = SelectField("Destination")
     submit = SubmitField('Search')

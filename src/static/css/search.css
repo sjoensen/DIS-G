@@ -5,11 +5,11 @@
 }
 
 .search-input {
-    width: 25%;
+    width: 35%;
 }
 
 .search-results {
-    width: 75%;
+    width: 65%;
 }
 
 .row:after {

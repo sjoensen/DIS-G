@@ -6,4 +6,6 @@
     --nav-bar: #dddddd;
     --nav-bar-hover: #eeeeee;
     --nav-bar-text: #111111;
+    --form-label-width: 12rem;
+    --form-separation: 0.5rem;
 }
