@@ -15,7 +15,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = util.get_secret_key()
 
 util.reset()
-# test()
 
 app.register_blueprint(Tag)
 app.register_blueprint(Location)

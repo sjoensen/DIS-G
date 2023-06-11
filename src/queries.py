@@ -1,5 +1,8 @@
-from src.db.util import cursor, commit
+import psycopg2
+
+from src.db.util import cursor, commit, UniqueViolation, rollback
 from src.models import Tag, Station, Line, Location, Amenity
+from psycopg2 import errors
 
 
 def _format_list(lst: [str]):
@@ -134,11 +137,37 @@ def get_stations_with_all_tags(line: str, origin: str, destination: str, tags: [
         print(cur.fetchall())
 
 
+def insert_tag(value):
+    sql = f"INSERT INTO tags (type) VALUES ('{value}')"
+    try:
+        with cursor() as cur:
+            cur.execute(sql)
+        commit()
+    except psycopg2.Error as e:
+        print(e)
+        rollback()
+
+
+def update_tag(new_type, old_type):
+    sql = f"UPDATE tags SET type = '{new_type}' WHERE type = '{old_type}'"
+    print(sql)
+    try:
+        with cursor() as cur:
+            cur.execute(sql)
+        commit()
+    except psycopg2.Error as e:
+        print(e)
+        rollback()
+
+
 def delete(table: str, pkey, values):
     sql = f"DELETE FROM {table} WHERE {pkey} IN ({_format_list(values)})"
-
-    with cursor() as cur:
-        cur.execute(sql)
+    try:
+        with cursor() as cur:
+            cur.execute(sql)
+        commit()
+    except psycopg2.Error as e:
+        rollback()
 
 
 # DELETE FROM tags

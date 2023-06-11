@@ -27,16 +27,21 @@ class SearchForm(FlaskForm):
     line = SelectField("Line")
     origin = SelectField("Origin")
     destination = SelectField("Destination")
+    search_type = SelectField("Search type")
+    specials = SelectField("Sorting")
     min_walk_minutes = IntegerField("Min walk time, in minutes")
     max_walk_minutes = IntegerField("Max walk time, in minutes")
     min_line_proximity = IntegerField("Min amount of stops")
     max_line_proximity = IntegerField("Max amount of stops")
-    specials = SelectField("Sorting")
     tags = MultiCheckboxField("Tag")
 
 
 class TagForm(FlaskForm):
-    name = StringField("Name")
+    add = SubmitField("Add")
+    edit = SubmitField("Update")
+    # add = SubmitField("Add")
+    type = StringField("Name")
+    old_type = StringField("Old_Type")
 
 
 class LocationForm(FlaskForm):

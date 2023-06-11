@@ -45,6 +45,12 @@
                             {% for col in columns %}
                                 {% if col[2] == "data" %}
                                     <td>{{ r[col[0]] }}</td>
+                                {% elif col[2] == "edit" %}
+                                    <td style="cursor: pointer;">&#9998;</td>
+                                {% elif col[2] == "delete" %}
+                                    <form action="{{ url_for('station.delete_station', name=r.name) }}" method=post>
+                                        <td style="cursor: pointer;"><input type=submit value=&#x2716;></td>
+                                    </form>
                                 {% endif %}
                             {% endfor %}
                         </tr>

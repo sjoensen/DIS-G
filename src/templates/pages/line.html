@@ -12,13 +12,13 @@
 
     <div class="row">
         <div class="column search-input">
-            <form method={{ method }} action="{{ url_for(action) }}">
+            <form method={{ 'post' }} action="{{ url_for('line.add_line') }}">
                 {{ form.hidden_tag() }}
                 {% for field in form %}
-                    {% if field.label.text == "Search" %}
+                    {% if field.label.text == "Add" %}
                         <div class="form-group">
-                            <label><a href="{{ url_for(action) }}" class="btn">Clear filters</a></label>
-                            <span>{{ form.submit(class="btn") }}</span>
+{#                            <label><a href="{{ url_for('tag.add_tag') }}" class="btn">Clear filters</a></label>#}
+                            <span>{{ form.add(class="btn") }}</span>
                         </div>
                     {% elif field.label.text == "CSRF Token" %}
                         <div></div>
@@ -45,6 +45,20 @@
                             {% for col in columns %}
                                 {% if col[2] == "data" %}
                                     <td>{{ r[col[0]] }}</td>
+{#                                    <form action="{{ url_for('tag.add_tag', type=r.type) }}" method=post>#}
+{#                                        <span>{{ form.submit(class="btn") }}</span>#}
+{#                                        <td style="cursor: pointer;"><input type=submit value=+></td>#}
+{#                                    </form>#}
+                                {% elif col[2] == "edit" %}
+{#                                    <td style="cursor: pointer;">&#9998;</td>#}
+                                    <form action="{{ url_for('line.edit_line') }}" method=post>
+                                        <td style="cursor: pointer;"><input type=submit value=&#9998;></td>
+                                    </form>
+                                {% elif col[2] == "delete" %}
+{#                                    <label><a href="{{ url_for(action) }}" class="btn">Clear filters</a></label>#}
+                                    <form action="{{ url_for('line.delete_line', name=r.name) }}" method=post>
+                                        <td style="cursor: pointer;"><input type=submit value=&#x2716;></td>
+                                    </form>
                                 {% endif %}
                             {% endfor %}
                         </tr>

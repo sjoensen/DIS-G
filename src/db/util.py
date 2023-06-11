@@ -5,6 +5,9 @@ import numpy as np
 from dotenv import load_dotenv
 from psycopg2.extensions import register_adapter, AsIs
 from psycopg2.extras import RealDictCursor
+from psycopg2 import errors
+
+UniqueViolation = errors.lookup('23505')
 
 CSV_SEPARATOR = ','
 
@@ -68,6 +71,10 @@ def cursor():
 
 def commit():
     _get_connection().commit()
+
+
+def rollback():
+    _get_connection().rollback()
 
 
 def reset() -> None:

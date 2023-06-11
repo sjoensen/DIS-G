@@ -22,6 +22,21 @@
                     <label>{{ form.type.label }}</label>
                     <span>{{ form.type }}</span>
                 </div>
+{#                {% for field in form %}#}
+{#                    {% if field.label.text == "Add" %}#}
+{#                        <div class="form-group">#}
+{#                            <label><a href="{{ url_for('tag.add_tag') }}" class="btn">Clear filters</a></label>#}
+{#                            <span>{{ form.add(class="btn") }}</span>#}
+{#                        </div>#}
+{#                    {% elif field.label.text == "CSRF Token" %}#}
+{#                        <div></div>#}
+{#                    {% else %}#}
+{#                        <div class="form-group">#}
+{#                            <label>{{ field.label }}</label>#}
+{#                            <span>{{ field }}</span>#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
             </form>
         </div>
 
