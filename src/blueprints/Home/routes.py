@@ -18,7 +18,7 @@ def search():
     form.tags.choices = [(t.type, t.type) for t in get_tags()]
 
     if request.method == 'POST':
-        results = get_locations_with_tags(
+        results = get_stations_with_all_tags(
             form.line.data,
             form.origin.data,
             form.destination.data,
