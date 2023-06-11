@@ -1,4 +1,4 @@
-from src.db.util import cursor
+from src.db.util import cursor, commit
 from src.models import Tag, Station, Line, Location, Amenity
 
 
@@ -91,6 +91,45 @@ def filtered_search(
     with cursor() as cur:
         cur.execute(sql)
         return cur.fetchall()
+
+
+def delete(table: str, pkey, values):
+    sql = f"DELETE FROM {table} WHERE {pkey} IN ({_format_list(values)})"
+
+    with cursor() as cur:
+        cur.execute(sql)
+
+
+# DELETE FROM tags
+# WHERE (type = {fun(val)});
+#
+# - stations
+# DELETE FROM stations
+# WHERE {fun(val)};
+#
+# - station_lines
+# DELETE FROM station_lines
+# WHERE {fun(val)};
+#
+# - locations
+# DELETE FROM locations
+# WHERE {fun(val)};
+#
+# - location_amenities
+# DELETE FROM location_amenities
+# WHERE {fun(val)};
+#
+# - lines
+# DELETE FROM lines
+# WHERE {fun(val)};
+#
+# - amenity_tags
+# DELETE FROM amenity_tags
+# WHERE {fun(val)};
+#
+# - amenities
+# DELETE FROM amenities
+# WHERE {fun(val)};
 
 
 def test():
