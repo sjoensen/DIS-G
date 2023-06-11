@@ -51,13 +51,19 @@
             {% if results|length %}
                 <table>
                     <tr>
-                        <th>Location</th>
-                        <th>Type</th>
+                        <th>Station</th>
+                        <th>Minutes to walk</th>
+                        <th>Amenity</th>
+                        <th>Address</th>
+                        <th>Tag</th>
                     </tr>
                     {% for r in results %}
                         <tr>
+                            <td>{{ r.station }}</td>
+                            <td>{{ r.minutes_to_walk }}</td>
                             <td>{{ r.name }}</td>
-                            <td>{{ r.type }}</td>
+                            <td>{{ r.address }}</td>
+                            <td>{{ r.tag }}</td>
                         </tr>
                     {% endfor %}
                 </table>

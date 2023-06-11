@@ -2,11 +2,41 @@ from src.db.util import cursor
 from src.models import Tag, Station, Line, Location
 
 
+def _format_list(lst: [str]):
+    lst = ",".join(lst)
+    lst = lst.replace(",", "','")
+    lst = "'" + lst + "'"
+    return lst
+
+
 def get_locations_with_tags(line: str, origin: str, destination: str, tags: [str]):
     sql =\
     f"""
-    SELECT type FROM tags
-    WHERE type IN {tuple(tags)}
+    SELECT station, minutes_to_walk, name, address, tag
+    FROM locations L
+    NATURAL JOIN (
+        SELECT amenity_id, location_id AS id
+        FROM location_amenities
+    ) AS LA
+    NATURAL JOIN (
+        SELECT amenity_id, tag
+        FROM amenity_tags
+        WHERE tag IN ({_format_list(tags)})
+    ) AS AT
+    NATURAL JOIN (
+        SELECT SL.station, SL.position, ABS(SL.position - SLOrig.position) AS priority
+        FROM station_lines SLOrig, station_lines SLDest, station_lines SL
+        WHERE SL.line = '{line}'
+        AND SLOrig.line = '{line}'
+        AND SLDest.line = '{line}'
+        AND SLOrig.station = '{origin}'
+        AND SLDest.station = '{destination}'
+        AND (
+            SL.position BETWEEN SLOrig.position AND SLDest.position
+            OR SL.position BETWEEN SLDest.position AND SLOrig.position
+        )
+    ) AS S
+    ORDER BY priority, minutes_to_walk;
     """
 
     print(sql)
