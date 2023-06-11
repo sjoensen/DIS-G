@@ -22,6 +22,13 @@ class Tag(dict):
         self.type = data.get('type')
 
 
+class Amenity(dict):
+    def __init__(self, data: dict):
+        super(Amenity, self).__init__(data)
+        self.id = data.get('id')
+        self.name = data.get('name')
+
+
 class Line(dict):
     def __init__(self, data: dict):
         super(Line, self).__init__(data)

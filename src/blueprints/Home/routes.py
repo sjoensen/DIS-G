@@ -17,6 +17,14 @@ SPECIAL_CHOICES = [
     (("minutes_to_walk", "DESC"), "Maximum walk time"),
 ]
 
+TABLE_COLUMNS = [
+    ("station", "Station"),
+    ("minutes_to_walk", "Minutes to walk"),
+    ("name", "Name"),
+    ("address", "Address"),
+    ("tag", "Tag"),
+]
+
 
 @Home.route("/", methods=['GET', 'POST'])
 @Home.route("/search", methods=['GET', 'POST'])
@@ -43,4 +51,9 @@ def search():
             form.specials.data
         )
 
-    return render_template("pages/search.html", form=form, results=results)
+    return render_template("pages/search.html", form=form, table_data=results, columns=TABLE_COLUMNS)
+
+
+@Home.route("/about/")
+def about():
+    render_template("pages/about.html")

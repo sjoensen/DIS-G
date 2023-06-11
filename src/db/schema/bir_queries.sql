@@ -157,3 +157,37 @@ ORDER BY sl.position ASC, l.minutes_to_walk ASC
     WHERE L.minutes_to_walk < 1000
     AND L.minutes_to_walk > 0
     ORDER BY proximity ASC, minutes_to_walk ASC;
+
+
+
+
+SELECT station, (COUNT(*)) as count
+FROM locations L
+NATURAL JOIN (
+    SELECT amenity_id, location_id AS id
+    FROM location_amenities
+) AS LA
+NATURAL JOIN (
+    SELECT amenity_id, tag
+    FROM amenity_tags
+    WHERE tag = 'Toilet'
+    OR tag = 'Coffeeshop'
+) AS AT
+NATURAL JOIN (
+    SELECT SL.station, SL.position, ABS(SL.position - SLOrig.position) AS proximity
+    FROM station_lines SLOrig, station_lines SLDest, station_lines SL
+    WHERE SL.line = 'F'
+    AND SLOrig.line = 'F'
+    AND SLDest.line = 'F'
+    AND SLOrig.station = 'Hellerup'
+    AND SLDest.station = 'Nørrebro'
+    AND (
+        SL.position BETWEEN SLOrig.position AND SLDest.position
+        OR SL.position BETWEEN SLDest.position AND SLOrig.position
+    )
+) AS S
+WHERE L.minutes_to_walk < 1000
+AND L.minutes_to_walk > 0
+GROUP BY (station, proximity)
+ORDER BY count DESC, proximity ASC
+LIMIT 1

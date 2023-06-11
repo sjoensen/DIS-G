@@ -1,7 +1,7 @@
 from src.queries import get_tags, get_stations, get_lines
 from flask_wtf import FlaskForm
 from wtforms import widgets, StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, \
-    SelectMultipleField
+    SelectMultipleField, HiddenField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 
 
@@ -23,14 +23,41 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class SearchForm(FlaskForm):
-    tags = MultiCheckboxField("Tags")
+    submit = SubmitField('Search')
     line = SelectField("Line")
+    origin = SelectField("Origin")
+    destination = SelectField("Destination")
     min_walk_minutes = IntegerField("Min walk time, in minutes")
     max_walk_minutes = IntegerField("Max walk time, in minutes")
     min_line_proximity = IntegerField("Min amount of stops")
     max_line_proximity = IntegerField("Max amount of stops")
     specials = SelectField("Sorting")
-    search_results = SearchResultsTable()
-    origin = SelectField("Origin")
-    destination = SelectField("Destination")
-    submit = SubmitField('Search')
+    tags = MultiCheckboxField("Tag")
+
+
+class TagForm(FlaskForm):
+    name = StringField("Name")
+    old_name = HiddenField("old_name")
+
+
+class LocationForm(FlaskForm):
+    id = IntegerField("ID")
+    name = StringField("Name")
+    address = StringField("Address")
+    station = StringField("Station")
+    minutes_to_walk = IntegerField("Minutes to walk")
+
+
+class LineForm(FlaskForm):
+    name = StringField("Name")
+    length = IntegerField("Length")
+
+
+class AmenityForm(FlaskForm):
+    id = IntegerField("ID")
+    name = StringField("Name")
+
+
+class StationForm(FlaskForm):
+    name = StringField("Name")
+    area = StringField("Area")

@@ -1,5 +1,5 @@
 from src.db.util import cursor
-from src.models import Tag, Station, Line, Location
+from src.models import Tag, Station, Line, Location, Amenity
 
 
 def _format_list(lst: [str]):
@@ -10,15 +10,15 @@ def _format_list(lst: [str]):
 
 
 def filtered_search(
-    line: str,
-    origin: str,
-    destination: str,
-    tags: [str],
-    min_minutes_to_walk,
-    max_minutes_to_walk,
-    min_line_proximity,
-    max_line_proximity,
-    selected_sorting
+        line: str,
+        origin: str,
+        destination: str,
+        tags: [str],
+        min_minutes_to_walk,
+        max_minutes_to_walk,
+        min_line_proximity,
+        max_line_proximity,
+        selected_sorting
 ):
     min_minutes_to_walk = 0 if min_minutes_to_walk is None else min_minutes_to_walk
     max_minutes_to_walk = 10000 if max_minutes_to_walk is None else max_minutes_to_walk
@@ -30,39 +30,62 @@ def filtered_search(
     split = sorting.split(", ")
     second = "proximity" if split[0] != "proximity" else "minutes_to_walk"
     sorting = f"""{split[0]} {split[1]}, {second} ASC"""
-    #TODO: Generalise minutes to walk < 20 to MAX walking time and Minutes_to_walk > 5 to MINIMUM walking time
-    sql =\
-    f"""
-    SELECT station, minutes_to_walk, name, address, tag
-    FROM locations L
-    NATURAL JOIN (
-        SELECT amenity_id, location_id AS id
-        FROM location_amenities
-    ) AS LA
-    NATURAL JOIN (
-        SELECT amenity_id, tag
-        FROM amenity_tags
-        WHERE tag IN ({_format_list(tags)})
-    ) AS AT
-    NATURAL JOIN (
-        SELECT SL.station, SL.position, ABS(SL.position - SLOrig.position) AS proximity
+    # TODO: Generalise minutes to walk < 20 to MAX walking time and Minutes_to_walk > 5 to MINIMUM walking time
+
+    sql_origin_search = \
+        f"""
+            FROM station_lines SLOrig, station_lines SL
+                WHERE SL.line = '{line}'
+                AND SLOrig.station = '{origin}'
+                AND SL.station = '{origin}'
+            """
+
+    sql_whole_line_search = \
+        f"""
+        FROM station_lines SLOrig, station_lines SL
+            WHERE SL.line = '{line}'
+            AND SLOrig.line = '{line}'
+            AND SLOrig.station = '{origin}'
+        """
+
+    sql_origin_to_destination_search = \
+        f"""
         FROM station_lines SLOrig, station_lines SLDest, station_lines SL
-        WHERE SL.line = '{line}'
-        AND SLOrig.line = '{line}'
-        AND SLDest.line = '{line}'
-        AND SLOrig.station = '{origin}'
-        AND SLDest.station = '{destination}'
-        AND (
-            SL.position BETWEEN SLOrig.position AND SLDest.position
-            OR SL.position BETWEEN SLDest.position AND SLOrig.position
-        )
-    ) AS S
-    WHERE L.minutes_to_walk BETWEEN {min_minutes_to_walk} AND {max_minutes_to_walk} 
-    AND S.proximity BETWEEN {min_line_proximity} AND {max_line_proximity} 
-    -- WHERE L.minutes_to_walk <= {max_minutes_to_walk}
-    -- AND L.minutes_to_walk >= {min_minutes_to_walk}
-    ORDER BY {sorting};
-    """
+            WHERE SL.line = '{line}'
+            AND SLOrig.line = '{line}'
+            AND SLDest.line = '{line}'
+            AND SLOrig.station = '{origin}'
+            AND SLDest.station = '{destination}'
+            AND (
+                SL.position BETWEEN SLOrig.position AND SLDest.position
+                OR SL.position BETWEEN SLDest.position AND SLOrig.position
+            )
+        """
+
+    sql_search_method = sql_whole_line_search if destination == "destination_all" else sql_origin_to_destination_search
+    sql_search_method = sql_origin_search if destination == "destination_none" else sql_search_method
+
+    sql = \
+        f"""
+        SELECT station, minutes_to_walk, name, address, tag
+        FROM locations L
+        NATURAL JOIN (
+            SELECT amenity_id, location_id AS id
+            FROM location_amenities
+        ) AS LA
+        NATURAL JOIN (
+            SELECT amenity_id, tag
+            FROM amenity_tags
+            WHERE tag IN ({_format_list(tags)})
+        ) AS AT
+        NATURAL JOIN (
+            SELECT SL.station, SL.position, ABS(SL.position - SLOrig.position) AS proximity
+            {sql_search_method}
+        ) AS S
+        WHERE L.minutes_to_walk BETWEEN {min_minutes_to_walk} AND {max_minutes_to_walk} 
+        AND S.proximity BETWEEN {min_line_proximity} AND {max_line_proximity} 
+        ORDER BY {sorting};
+        """
 
     print(sql)
     with cursor() as cur:
@@ -88,6 +111,10 @@ def get_locations():
 
 def get_tags():
     return _query_list(Tag, "tags")
+
+
+def get_amenities():
+    return _query_list(Amenity, "amenities")
 
 
 def _query_list(constructor, table_name: str):

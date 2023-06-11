@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        main {
+            box-sizing: border-box;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+{#    {% include 'components/filter.html' %}#}
+    <div class="row">
+        <div class="column search-input">
+            <p>Test</p>
+        </div>
+
+        <div class="column search-results">
+            {% if tags|length %}
+                <table>
+                    <tr>
+                        <th>Tags</th>
+                    </tr>
+                    {% for t in tags %}
+                        <tr>
+                            <td>{{ t.type }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+        {% else %}
+        {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        let food_select = document.get.elementById('food');
+
+        food_select.onchange = function(){
+            food = food_select.value;
+            alert(food);
+        }
+    </script>
+{% endblock %}
