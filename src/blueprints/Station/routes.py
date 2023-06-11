@@ -8,8 +8,6 @@ Station = Blueprint('station', __name__)
 TABLE_COLUMNS = [
     ("name", "Name", "data"),
     ("area", "Area", "data"),
-    ("", "", "update"),
-    ("", "", "delete"),
 ]
 
 

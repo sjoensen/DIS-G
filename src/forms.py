@@ -1,8 +1,5 @@
-from src.queries import get_tags, get_stations, get_lines
 from flask_wtf import FlaskForm
-from wtforms import widgets, StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, \
-    SelectMultipleField, HiddenField
-from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
+from wtforms import widgets, StringField, SubmitField, BooleanField, IntegerField, SelectField, SelectMultipleField
 
 
 class LookupForm(FlaskForm):
@@ -27,19 +24,17 @@ class SearchForm(FlaskForm):
     line = SelectField("Line")
     origin = SelectField("Origin")
     destination = SelectField("Destination")
-    # search_type = SelectField("Search type")
     specials = SelectField("Sorting")
     min_walk_minutes = IntegerField("Min walk time, in minutes")
     max_walk_minutes = IntegerField("Max walk time, in minutes")
-    min_line_proximity = IntegerField("Min amount of stops")
-    max_line_proximity = IntegerField("Max amount of stops")
-    tags = MultiCheckboxField("Tag")
+    min_line_proximity = IntegerField("Min distance from origin")
+    max_line_proximity = IntegerField("Max distance from origin")
+    tags = MultiCheckboxField("Tags")
 
 
 class TagForm(FlaskForm):
     add = SubmitField("Add")
     edit = SubmitField("Update")
-    # add = SubmitField("Add")
     type = StringField("Name")
     old_type = StringField("Old_Type")
 

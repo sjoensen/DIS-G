@@ -1,8 +1,6 @@
 from flask import render_template, request, Blueprint
-
 from src.forms import SearchForm
-from src.queries import get_tags, get_lines, get_stations, filtered_search, find_highest_tag_incidence, \
-    get_stations_with_all_tags
+from src.queries import get_tags, get_lines, get_stations, filtered_search
 
 Home = Blueprint('home', __name__)
 
@@ -71,29 +69,6 @@ def search():
             max_line_proximity,
             sorting
         )
-
-    # if form.search_type.data == 'ANY_TAGS_MATCHING':
-    # elif form.search_type.data == 'ALL_TAGS_MATCHING':
-    #     results = get_stations_with_all_tags(
-    #         form.line.data,
-    #         form.origin.data,
-    #         form.destination.data,
-    #         form.tags.data,
-    #         min_minutes_to_walk,
-    #         max_minutes_to_walk,
-    #         min_line_proximity,
-    #         max_line_proximity,
-    #         sorting
-    #     )
-    # elif form.search_type.data == 'HIGHEST_INCIDENCE':
-    #     results = find_highest_tag_incidence(
-    #         form.line.data,
-    #         form.origin.data,
-    #         form.destination.data,
-    #         form.tags.data,
-    #         min_minutes_to_walk,
-    #         max_minutes_to_walk
-    #     )
 
     return render_template("pages/search.html", method="POST", action="home.search", form=form, table_data=results, columns=TABLE_COLUMNS)
 

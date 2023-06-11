@@ -1,8 +1,6 @@
 import psycopg2
-
-from src.db.util import cursor, commit, UniqueViolation, rollback
+from src.db.util import cursor, commit, rollback
 from src.models import Tag, Station, Line, Location, Amenity
-from psycopg2 import errors
 
 
 def _format_list(lst: [str]):
@@ -84,96 +82,98 @@ def filtered_search(
         return cur.fetchall()
 
 
-def get_stations_with_all_tags(
-        line: str, origin: str, destination: str, tags: [str],
-        min_minutes_to_walk, max_minutes_to_walk,
-        min_line_proximity, max_line_proximity,
-        sorting ):
-    numstr = "AT"+str(len(tags)-1)
-    join_string = "SELECT slstation AS station, " + numstr + ".name, " + numstr + ".tag, "
-    join_string += numstr + ".minutes_to_walk, " + numstr + ".address "
-    join_string += "FROM (SELECT station, minutes_to_walk, name, tag, address FROM locations L "
-    join_string += "NATURAL JOIN (SELECT amenity_id, location_id AS id FROM location_amenities) AS LA "
-    join_string += "NATURAL JOIN (SELECT amenity_id, tag FROM amenity_tags WHERE tag='" + tags[0] + "') AS ATA ) "
-    join_string += "AS AT0 "
+# Didn't manage to make them work in time :(
 
-    for i in range(1, len(tags)):
-        join_string += " INNER JOIN"
-        join_string += "(SELECT station, minutes_to_walk, name, tag, address FROM locations L "
-        join_string += "NATURAL JOIN (SELECT amenity_id, location_id AS id FROM location_amenities) AS LA "
-        join_string += "NATURAL JOIN (SELECT amenity_id, tag FROM amenity_tags WHERE tag='" + tags[i] + "') AS ATA ) "
-        join_string += "AS AT" + str(i)
-        join_string += " ON AT" + str(i-1) + ".station=AT" + str(i) + ".station "
+# def get_stations_with_all_tags(
+#         line: str, origin: str, destination: str, tags: [str],
+#         min_minutes_to_walk, max_minutes_to_walk,
+#         min_line_proximity, max_line_proximity,
+#         sorting ):
+#     numstr = "AT"+str(len(tags)-1)
+#     join_string = "SELECT slstation AS station, " + numstr + ".name, " + numstr + ".tag, "
+#     join_string += numstr + ".minutes_to_walk, " + numstr + ".address "
+#     join_string += "FROM (SELECT station, minutes_to_walk, name, tag, address FROM locations L "
+#     join_string += "NATURAL JOIN (SELECT amenity_id, location_id AS id FROM location_amenities) AS LA "
+#     join_string += "NATURAL JOIN (SELECT amenity_id, tag FROM amenity_tags WHERE tag='" + tags[0] + "') AS ATA ) "
+#     join_string += "AS AT0 "
+#
+#     for i in range(1, len(tags)):
+#         join_string += " INNER JOIN"
+#         join_string += "(SELECT station, minutes_to_walk, name, tag, address FROM locations L "
+#         join_string += "NATURAL JOIN (SELECT amenity_id, location_id AS id FROM location_amenities) AS LA "
+#         join_string += "NATURAL JOIN (SELECT amenity_id, tag FROM amenity_tags WHERE tag='" + tags[i] + "') AS ATA ) "
+#         join_string += "AS AT" + str(i)
+#         join_string += " ON AT" + str(i-1) + ".station=AT" + str(i) + ".station "
+#
+#     rsql = \
+#         f"""
+#         {join_string}
+#         INNER JOIN (
+#         SELECT SL.station AS slstation, SL.position, ABS(SL.position - SLOrig.position) AS proximity
+#         FROM station_lines SLOrig, station_lines SLDest, station_lines SL
+#         WHERE SL.line = '{line}'
+#         AND SLOrig.line = '{line}'
+#         AND SLDest.line = '{line}'
+#         AND SLOrig.station = '{origin}'
+#         AND SLDest.station = '{destination}'
+#         AND (
+#             SL.position BETWEEN SLOrig.position AND SLDest.position
+#             OR SL.position BETWEEN SLDest.position AND SLOrig.position
+#         )) AS S
+#         ON {numstr}.station=S.slstation
+#         WHERE(
+#         {numstr}.minutes_to_walk BETWEEN {min_minutes_to_walk} AND {max_minutes_to_walk}
+#         AND proximity BETWEEN {min_line_proximity} AND {max_line_proximity}
+#         )
+#         ORDER BY {sorting}
+#         """
+#     print(rsql)
+#     with cursor() as cur:
+#         cur.execute(rsql)
+#         return(cur.fetchall())
 
-    rsql = \
-        f"""
-        {join_string}
-        INNER JOIN (
-        SELECT SL.station AS slstation, SL.position, ABS(SL.position - SLOrig.position) AS proximity
-        FROM station_lines SLOrig, station_lines SLDest, station_lines SL
-        WHERE SL.line = '{line}'
-        AND SLOrig.line = '{line}'
-        AND SLDest.line = '{line}'
-        AND SLOrig.station = '{origin}'
-        AND SLDest.station = '{destination}'
-        AND (
-            SL.position BETWEEN SLOrig.position AND SLDest.position
-            OR SL.position BETWEEN SLDest.position AND SLOrig.position
-        )) AS S
-        ON {numstr}.station=S.slstation
-        WHERE(
-        {numstr}.minutes_to_walk BETWEEN {min_minutes_to_walk} AND {max_minutes_to_walk}
-        AND proximity BETWEEN {min_line_proximity} AND {max_line_proximity}
-        )
-        ORDER BY {sorting}
-        """
-    print(rsql)
-    with cursor() as cur:
-        cur.execute(rsql)
-        return(cur.fetchall())
 
 
-
-def find_highest_tag_incidence(
-        line: str, origin: str, destination: str, tags: [str],
-        min_minutes_to_walk, max_minutes_to_walk):
-
-    bsql=\
-    f"""
-    SELECT station, (COUNT(*)) as tag
-    FROM locations L
-    NATURAL JOIN (
-        SELECT amenity_id, location_id AS id
-        FROM location_amenities
-    ) AS LA
-    NATURAL JOIN (
-        SELECT amenity_id, tag
-        FROM amenity_tags
-        WHERE tag = '{tags[0]}'
-    ) AS AT
-    NATURAL JOIN (
-        SELECT SL.station, SL.position, ABS(SL.position - SLOrig.position) AS proximity
-        FROM station_lines SLOrig, station_lines SLDest, station_lines SL
-        WHERE SL.line = '{line}'
-        AND SLOrig.line = '{line}'
-        AND SLDest.line = '{line}'
-        AND SLOrig.station = '{origin}'
-        AND SLDest.station = '{destination}'
-        AND (
-            SL.position BETWEEN SLOrig.position AND SLDest.position
-            OR SL.position BETWEEN SLDest.position AND SLOrig.position
-        )
-    ) AS S
-    WHERE L.minutes_to_walk < {max_minutes_to_walk}
-    AND L.minutes_to_walk > {min_minutes_to_walk}
-    GROUP BY (station, proximity)
-    ORDER BY count(*) DESC, proximity ASC
-    LIMIT 1
-    """
-    print(bsql)
-    with cursor() as cur:
-        cur.execute(bsql)
-        return(cur.fetchall())
+# def find_highest_tag_incidence(
+#         line: str, origin: str, destination: str, tags: [str],
+#         min_minutes_to_walk, max_minutes_to_walk):
+#
+#     bsql=\
+#     f"""
+#     SELECT station, (COUNT(*)) as tag
+#     FROM locations L
+#     NATURAL JOIN (
+#         SELECT amenity_id, location_id AS id
+#         FROM location_amenities
+#     ) AS LA
+#     NATURAL JOIN (
+#         SELECT amenity_id, tag
+#         FROM amenity_tags
+#         WHERE tag = '{tags[0]}'
+#     ) AS AT
+#     NATURAL JOIN (
+#         SELECT SL.station, SL.position, ABS(SL.position - SLOrig.position) AS proximity
+#         FROM station_lines SLOrig, station_lines SLDest, station_lines SL
+#         WHERE SL.line = '{line}'
+#         AND SLOrig.line = '{line}'
+#         AND SLDest.line = '{line}'
+#         AND SLOrig.station = '{origin}'
+#         AND SLDest.station = '{destination}'
+#         AND (
+#             SL.position BETWEEN SLOrig.position AND SLDest.position
+#             OR SL.position BETWEEN SLDest.position AND SLOrig.position
+#         )
+#     ) AS S
+#     WHERE L.minutes_to_walk < {max_minutes_to_walk}
+#     AND L.minutes_to_walk > {min_minutes_to_walk}
+#     GROUP BY (station, proximity)
+#     ORDER BY count(*) DESC, proximity ASC
+#     LIMIT 1
+#     """
+#     print(bsql)
+#     with cursor() as cur:
+#         cur.execute(bsql)
+#         return(cur.fetchall())
 
 
 def insert_tag(value):
@@ -208,44 +208,6 @@ def delete(table: str, pkey, values):
     except psycopg2.Error as e:
         rollback()
 
-
-# DELETE FROM tags
-# WHERE (type = {fun(val)});
-#
-# - stations
-# DELETE FROM stations
-# WHERE {fun(val)};
-#
-# - station_lines
-# DELETE FROM station_lines
-# WHERE {fun(val)};
-#
-# - locations
-# DELETE FROM locations
-# WHERE {fun(val)};
-#
-# - location_amenities
-# DELETE FROM location_amenities
-# WHERE {fun(val)};
-#
-# - lines
-# DELETE FROM lines
-# WHERE {fun(val)};
-#
-# - amenity_tags
-# DELETE FROM amenity_tags
-# WHERE {fun(val)};
-#
-# - amenities
-# DELETE FROM amenities
-# WHERE {fun(val)};
-
-
-def test():
-    get_stations_with_all_tags(
-        "F", "Ny Ellebjerg", "Hellerup",
-        ["Groceries"],
-        0, 4, 10, 12, " ")
 
 def get_lines():
     return _query_list(Line, "lines")

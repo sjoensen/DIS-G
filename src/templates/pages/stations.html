@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 
-{% block css %}
-    <style>
-        main {
-            box-sizing: border-box;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
-
     <div class="row">
         <div class="column search-input">
             <form method={{ method }} action="{{ url_for(action) }}">
@@ -56,9 +47,8 @@
                         </tr>
                     {% endfor %}
                 </table>
-        {% else %}
-        {% endif %}
+            {% else %}
+            {% endif %}
         </div>
     </div>
-
 {% endblock %}

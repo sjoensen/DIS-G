@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-<footer>
+{% block content %}
     <div>
-        <img src="{{ url_for('static', filename='images/cc_copenhagen_map.png') }}" alt="Map over Copenhagen">
+        <img src="{{ url_for('static', filename='images/cc_copenhagen_map.png') }}" width="500" height="500" alt="Map over Copenhagen">
     </div>
-</footer>
+{% endblock %}

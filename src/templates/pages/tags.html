@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 
-{% block css %}
-    <style>
-        main {
-            box-sizing: border-box;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
-
     <div class="row">
         <div class="column search-input">
             <form method={{ 'post' }} action="{{ url_for('tag.add_tag') }}">
@@ -42,12 +33,6 @@
                                     <form action="{{ url_for('tag.select_tag', type=r.type) }}" method=post>
                                         <td style="cursor: pointer;"><input type=submit value=&#9998;></td>
                                     </form>
-{#                                    <form action="{{ url_for('tag.add_tag', type=r.type) }}" method=post>#}
-{#                                        <span>{{ form.submit(class="btn") }}</span>#}
-{#                                        <td style="cursor: pointer;"><input type=submit value=+></td>#}
-{#                                    </form>#}
-{#                                {% elif col[2] == "edit" %}#}
-{#                                    <td style="cursor: pointer;">&#9998;</td>#}
                                 {% elif col[2] == "delete" %}
                                     <form action="{{ url_for('tag.delete_tag', type=r.type) }}" method=post>
                                         <td style="cursor: pointer;"><input type=submit value=&#x2716;></td>
@@ -57,9 +42,8 @@
                         </tr>
                     {% endfor %}
                 </table>
-        {% else %}
-        {% endif %}
+            {% else %}
+            {% endif %}
         </div>
     </div>
-
 {% endblock %}
