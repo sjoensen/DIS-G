@@ -46,8 +46,8 @@ def get_locations_with_tags(line: str, origin: str, destination: str, tags: [str
 
 
 def test():
-    get_tags()
-
+    #get_tags()
+    get_stations_with_all_tags("F", "Hellerup", "Ny Ellebjerg", ["Toilet", "Groceries", "Pharmacy"])
 
 def get_lines():
     return _query_list(Line, "lines")
